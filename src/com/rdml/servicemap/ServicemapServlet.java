@@ -88,8 +88,23 @@ public class ServicemapServlet extends HttpServlet {
 	            // ...
 	        }			
 		}
+		
+		String username = USERNAME;
+		String password = PASSWORD;
+		String zohoApiKey = ServicemapServlet.zohoApiKey;
+		
+		if (req.getParameter("zohoUsername") != null)
+			username = req.getParameter("zohoUsername");
+		
+		if (req.getParameter("zohoPassword") != null) {
+			password = req.getParameter("zohoPassword");
+		}
+		
+		if (req.getParameter("zohoApiKey") != null) {
+			zohoApiKey = req.getParameter("zohoApiKey");
+		}
 
-		String ticket = getIAmTicket("ZohoCRM", USERNAME, PASSWORD);
+		String ticket = getIAmTicket("ZohoCRM", username, password);
 	    String targetURL = "https://crm.zoho.com/crm/private/xml/Leads/getAllRecords?apikey=" + zohoApiKey + "&" + "ticket=" + ticket;
 
 	    String json = null;
@@ -214,8 +229,10 @@ public class ServicemapServlet extends HttpServlet {
 	}
 
 	private synchronized String getIAmTicket(String serviceName, String userName, String password) {
-		if (cache.containsKey("iAmTicket"))
-			return (String) cache.get("iAmTicket");
+		String ticketKey = serviceName + "-" + userName + "-" + password;
+		
+		if (cache.containsKey(ticketKey))
+			return (String) cache.get(ticketKey);
 		
         String strTicket = null;
 	    try {
@@ -241,7 +258,7 @@ public class ServicemapServlet extends HttpServlet {
         	e.printStackTrace();
         }
 
-        cache.put("iAmTicket", strTicket);
+        cache.put(ticketKey, strTicket);
         return strTicket;
 	}
 }
