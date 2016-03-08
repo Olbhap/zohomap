@@ -1,0 +1,1 @@
+This project intend to provide simple integration between Zoho CRM and Google Maps.

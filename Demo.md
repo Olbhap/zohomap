@@ -1,0 +1,14 @@
+# Demo #
+
+There is a demo at http://zohomap.appspot.com/
+
+At the moment the application by default uses a demo account, but you can override this by specifying the parameters "zohoUsername", "zohoPassword" and "zohoApiKey" in the query string.
+
+
+Ie.:
+
+```
+http://zohomap.appspot.com/?zohoUsername=<YOURUSERNAME>&zohoPassword=<YOURPASSWORD>&zohoApiKey=<YOURAPIKEY>
+```
+
+Note that the username and password are used as a cache key, BUT YOU PROBABLY DON'T WANT TO BE SO STUPID THAT YOU SEND YOUR USERNAME AND PASSWORDS IN CLEARTEXT TO THE DEMONSTRATION APP ANYWAY!
